@@ -1,0 +1,244 @@
+body,
+html {
+	width: 100%;
+	height: 100%;
+	font-size: 62.5%;
+	overflow: hidden;
+	/*这样会使1rem=10px;或者子元素的1em=10px*/
+}
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+a,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	box-sizing: border-box;
+	position: relative;
+}
+
+input,
+button,
+textarea,
+select {
+	outline: 0;
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+i {
+	font-weight: 100;
+	font-style: normal;
+}
+
+ul,
+ol,
+li {
+	list-style-type: none;
+}
+
+a{
+	color: aliceblue;
+	text-decoration: none;
+}
+textarea{
+	resize:none !important;
+}
+
+/* 修改滚动条 */
+*::-webkit-scrollbar {
+	/*滚动条整体样式*/
+	// width: 6px;
+	// height: 6px;
+	width: 0;
+	height: 0;
+	/*高宽分别对应横竖滚动条的尺寸*/
+	background: #ebeef5;
+	-webkit-box-shadow: inset 1px 0 1px rgba(0, 0, 0, .2);
+}
+*::-webkit-scrollbar-thumb {
+	/*滚动条里面小方块*/
+	border-radius: 3px;
+	background: @scrollbarColor;
+	height: 120px;
+}
+*::-webkit-scrollbar-track {
+	/*滚动条里面轨道*/
+	-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
+	border-radius: 2px;
+	background: rgba(0, 0, 0, .1);
+}
+
+/*ie浏览器隐藏滚动条*/
+*{
+	-ms-scroll-chaining: chained;
+	-ms-overflow-style: none;
+	-ms-content-zooming: zoom;
+	-ms-scroll-rails: none;
+	-ms-content-zoom-limit-min: 100%;
+	-ms-content-zoom-limit-max: 500%;
+	-ms-scroll-snap-type: proximity;
+	-ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
+	-ms-overflow-style: none;
+}
+
+/* 左浮动 */
+.left {
+	float: left;
+	clear: none;
+}
+/* 右浮动 */
+.right {
+	float: right;
+	clear: none;
+}
+/* 内容靠左、右、中心 */
+.TAL {
+	text-align: left;
+}
+.TAR {
+	text-align: right;
+}
+.TAC {
+	text-align: center;
+}
+
+.transition{
+    transition: all .2s;
+}
+
+/* 撑满 */
+.width-full {
+	width: 100%;
+	overflow: hidden;
+}
+.wh-full {
+	width: 100%;
+	height: 100%;
+}
+.width-50-percent{
+	width: 50%;
+	overflow: hidden;
+}
+.width-100{
+	width: 100px !important;
+	overflow: hidden;
+}
+
+/* 文本溢出 */
+*[class*="text-over"]{
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+/* 单行 */
+.text-over {
+	white-space: nowrap;
+}
+/* 多行 */
+.text-over-lines {
+	display: -webkit-box;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	/* 子元素应该被水平或垂直排列 */
+	-webkit-line-clamp: 3;
+	/* 3行后显示省略号 */
+}
+
+/* flex */
+*[class*="flex"]{
+	display:-webkit-flex !important;
+}
+/* 子元素水平居中 */
+.flex-hor-center{
+	justify-content:center;
+}
+/* 子元素垂直居中 */
+.flex-ver-center{
+	align-items:center;
+}
+/* 子元素水平垂直居中 */
+.flex-hv-center{
+	justify-content:center;
+	align-items:center;
+}
+.clearfix:after { 
+	content:"";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
