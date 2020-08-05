@@ -2,7 +2,7 @@
 	<div class="Login_wrap">
 		<div class="login_model">
 			<div class="login_header">
-					微创系统管理
+					{{ $t('home.title')}}			
 			</div>
 			<div class="components-input-demo-presuffix centerMessage">
 				 <a-form :form="form" @submit="handleSubmit">
@@ -12,7 +12,7 @@
 						  'userName',
 						  { rules: [{ required: true, message: 'Please input your username!' }] },
 						]"
-						placeholder="请输入账号"
+						:placeholder="$t('home.putUserName')"
 						class="inputStyle"
 					  >
 					   <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
@@ -24,7 +24,7 @@
 						  'passWord',
 						 { rules: [{ required: true, message: 'Please input your password!' }] },
 						]"
-						placeholder="请输入密码"
+						:placeholder="$t('home.outPassWord')"
 						class="inputStyle"
 						type="password"
 					  >
@@ -34,16 +34,19 @@
 					  <a-form-item>
 					      <a-checkbox :checked="checkNick" @change="handleChange" style="float: left;
 						  line-height: 20px;margin-top: -10px;">
-					        记住账号密码
+							{{$t('home.rememberNum')}}
 					      </a-checkbox>
 					    </a-form-item>
 					<a-form-item>
 					      <a-button type="primary" html-type="submit" style="width: 100%;color: #FFFFFF;">
-					        登录
+					       	{{ $t('home.login')}}
 					      </a-button>
 					</a-form-item>	   
 				</a-form>
 			</div>
+		</div>
+		<div class="language">
+		<lang-lang/>
 		</div>
 	</div>
 </template>
@@ -86,9 +89,15 @@ export default {
 			 handleChange(e) {
 			      this.checkNick = e.target.checked;
 			},
+
+			//把国际化存到localStorage
+			setLocal(){
+				localStorage.setItem("locale",this.$i18n.locale);
+			}
+
 		},
 		mounted() {
-			
+			this.setLocal()	
 		}
 	}
 </script>
@@ -141,5 +150,11 @@ export default {
 				}
 			}
 		}
+	}
+
+	.language{
+		position: absolute;
+		top: 10%;
+		right: 5%;
 	}
 </style>

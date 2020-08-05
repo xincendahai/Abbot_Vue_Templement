@@ -9,9 +9,9 @@
 
 @headerBg1:#141F2A;
 // 头部高度
-@headerHeight: 6.4rem;
+@headerHeight: 5rem;
 // 面包屑背景
-@crumbsBg: #eaeaea;
+@crumbsBg: #fff;
 // 面包屑高度
 // @crumbsHeight:2.3rem;
 @crumbsHeight   : 3rem;
@@ -87,12 +87,13 @@
 
 .crumbs {
 	width     : 100%;
-	height    : @crumbsHeight;
+	// height    : @crumbsHeight;
 	position  : absolute;
 	top       : @headerHeight;
 	right     : 0;
 	background: @crumbsBg;
 	box-shadow: -5px 0 2px rgba(0, 0, 0, .1);
+	border-bottom: 1px solid #d8dce5;
 	z-index   : 10;
 	padding   : 0 3.5rem;
 	color     : #000;
@@ -120,16 +121,17 @@
 		border-right: 1px solid rgba(155, 155, 155, .25);
 		overflow    : hidden;
 		display     : flex;
+		margin: 0;
 	}
 
 	.crumb-item {
 		width        : auto;
 		height       : 100%;
+		margin: .2rem 0 .2rem 0.3rem;
 		flex-shrink  : 0;
-		padding      : 0 1rem;
-		border-right : 1px solid rgba(155, 155, 155, .25);
-		border-top   : 2px solid rgba(0, 0, 0, 0);
-		border-bottom: 2px solid rgba(0, 0, 0, 0);
+		padding      : .5rem 1rem;
+		border: 1px solid rgb(223, 220, 220);
+		color: #666;
 	}
 
 	.crumb-item i {
@@ -139,7 +141,7 @@
 
 	.crumb-item:hover,
 	.operation:hover {
-		color: #10C593;
+		color: #06c790;
 	}
 
 	.crumb-item:hover i {
@@ -148,7 +150,7 @@
 	}
 
 	.crumb-item.active {
-		color        : #10C593;
-		border-bottom: 2px solid #10C593;
+		color        : white;
+		background-color:  #06c790;
 	}
 }

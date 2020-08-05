@@ -1,7 +1,7 @@
 <template>
     <div style="width:100%;height: 100%;" >
-    <div class="layout_logo" v-if="!collapsed">
-        微创管理系统
+    <div class="layout_logo" v-if="!collapsed" style="padding: 0 1rem">
+       {{ $t('home.title')}}	
     </div>
     <div class="layout_logo" v-else>
          <a-icon type="global" />
@@ -57,12 +57,13 @@
               console.log(this.defaultKey)
               this.$bus.$emit('indexMenu', this.defaultKey) 
           },
+          //切换路由
           eventMenuClick({ item, key, keyPath }) {
              this.$router.push({
                 path: key
             })
-         },  
-      },
+          },  
+        },
 
         mounted() {
              this.$bus.$on('clickMenu', mes => {

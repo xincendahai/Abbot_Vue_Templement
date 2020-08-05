@@ -45,3 +45,6 @@ yarn lint
 #     })
 # 
 #   this.$bus.$emit('clickMenu', this.collapsed) 
+
+# 国际化 
+# yarn add vue-i18n --save

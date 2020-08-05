@@ -28,7 +28,6 @@
 		methods: {
 			move(type){
 				let pos = this.$refs.crumbs_list_model.scrollLeft;
-				// console.log(type)
 				if (type=='prev') {
 					if (pos>0&&pos<60) {
 						this.$refs.crumbs_list_model.scrollTo(0, 0);

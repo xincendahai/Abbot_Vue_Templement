@@ -8,8 +8,7 @@
 				 <layoutCrumbs/>
 				 <div class="content_center">
 					  <router-view/>
-				 </div>
-                
+				 </div>  
           </div>
 	</div>
 
