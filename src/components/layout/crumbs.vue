@@ -1,5 +1,5 @@
 <template>
-	<div class="crumbs">
+	<div class="crumbs" v-if="this.$store.state.theme.openTagsView">
 		<i class="operation flex-hv-center transition prev-btn el-icon-d-arrow-left" @click="move('prev')"></i>
 		<ul class="crumbs-list-model transition crumbs-list" ref="crumbs_list_model">
 			<li class="crumb-item left flex-hv-center transition" v-for="(item,index) in crumbsList"
@@ -102,3 +102,6 @@
 		}
 	}
 </script>
+<style scoped>
+
+</style>

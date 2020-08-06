@@ -1,14 +1,18 @@
 <template>
     <div style="width:100%;height: 100%;" >
-    <div class="layout_logo" v-if="!collapsed" style="padding: 0 1rem">
-       {{ $t('home.title')}}	
-    </div>
-    <div class="layout_logo" v-else>
-         <a-icon type="global" />
+    <div v-if="this.$store.state.theme.sidebarLogo">
+        <div class="layout_logo" v-if="!collapsed" style="padding: 0 1rem" 
+        :class="this.$store.state.theme.themeColor == false ? 'layout_logoColor':'layout_logo' "
+        >
+            {{ $t('home.title')}}	
+        </div>
+        <div class="layout_logo" v-else>
+                <a-icon type="global" />
+        </div>
     </div>
     <a-menu
         mode="inline"
-        theme="dark"
+        :theme= this.$store.state.theme.theme
         :inline-collapsed="collapsed"
         @click="eventMenuClick"
         :default-selected-keys="[$route.path]"
@@ -36,12 +40,13 @@
 	export default {
 	  data() {
 	    return {
-          collapsed: false,
-          menuList:[],
-          defaultKey:'',
+          collapsed : false,
+          menuList :[],
+          defaultKey :'',
 	    };
       },
-      watch:{
+      watch: {       
+       
 		},
 	  methods: {
           //获取menu的列表
@@ -53,8 +58,7 @@
                   }else{
                       this.defaultKey = this.menuList[0].menuUrl
                   }
-              }
-              console.log(this.defaultKey)
+              } 
               this.$bus.$emit('indexMenu', this.defaultKey) 
           },
           //切换路由
@@ -65,17 +69,18 @@
           },  
         },
 
+
         mounted() {
              this.$bus.$on('clickMenu', mes => {
-                this.collapsed = mes
+                this.collapsed = mes 
             })
-            this.getMenuData();
-           
+            this.getMenuData();  
+                          
         }
 	};
 </script>
 
-<style>
+<style scoped lang="less">
 .layout_logo{
     width: 100%;
     height: 6.4rem;
@@ -84,6 +89,15 @@
     text-align: center;
     font-size: 2.2rem;
 }
+.layout_logoColor{
+    width: 100%;
+    height: 6.4rem;
+    line-height: 6.4rem;
+    color: #0F5B42;
+    text-align: center;
+    font-size: 2.2rem;
+}
+
 
 
 </style>

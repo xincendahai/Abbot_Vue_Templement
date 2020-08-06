@@ -42,9 +42,7 @@ export default {
     padding: 0;
     background: #fff;
 	line-height: 5rem;
-	// box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-	// -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-	//  box-shadow: 0px 0px 10px 20px #0ff;
+	box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 	box-sizing: inherit;
 }
 

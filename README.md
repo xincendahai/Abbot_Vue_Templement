@@ -48,3 +48,6 @@ yarn lint
 
 # 国际化 
 # yarn add vue-i18n --save
+# 全屏
+# npm install --save screenfull
+

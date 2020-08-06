@@ -9,12 +9,12 @@
 
 @headerBg1:#141F2A;
 // 头部高度
-@headerHeight: 5rem;
+@headerHeight: 5.1rem;
 // 面包屑背景
 @crumbsBg: #fff;
 // 面包屑高度
 // @crumbsHeight:2.3rem;
-@crumbsHeight   : 3rem;
+@crumbsHeight   : 3.7rem;
 // 侧边栏背景
 @sideBg: #141F2A;
 // 侧边栏展开宽度
@@ -28,6 +28,10 @@
 @modelBg: rgba(155, 155, 1, 0);
 //侧边栏背景颜色
 @layout:#001529;
+//侧边栏主题白
+@layoutLight:white;
+
+
 //中心背景模块
 @lay_center:#f0f2f5;
 
@@ -67,7 +71,10 @@
         height: calc(100vh);
 		background:@layout;
 		text-align: left;
-    }
+	}
+	.nav-leftLight{
+		background:@layoutLight;
+	}
     .main{
 		flex: 1;
         height: calc(100vh);
@@ -80,6 +87,9 @@
 			overflow-y: auto;
 			color     : #000;
 		}
+		.contentHidden{
+			margin-top: 0rem;
+		}
     }
 }
 
@@ -87,15 +97,14 @@
 
 .crumbs {
 	width     : 100%;
-	// height    : @crumbsHeight;
 	position  : absolute;
 	top       : @headerHeight;
 	right     : 0;
 	background: @crumbsBg;
-	box-shadow: -5px 0 2px rgba(0, 0, 0, .1);
+	box-shadow: -2px 0 2px rgba(0, 0, 0, .1);
 	border-bottom: 1px solid #d8dce5;
 	z-index   : 10;
-	padding   : 0 3.5rem;
+    padding   : 0 3.5rem;
 	color     : #000;
 	cursor    : pointer;
 
