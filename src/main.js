@@ -24,6 +24,11 @@ import unit from './unit'
 Vue.use(unit)
 
 Vue.use(Vue18n)
+
+// 引入echarts
+import echarts from 'echarts'
+
+
 // 注册全局变量
 import basicData from './config/basicData'
 //引入全局基础数据
@@ -34,6 +39,8 @@ Vue.use(basicData)
 
 Vue.prototype.$bus = Bus
 Vue.config.productionTip = false
+// 注册$echarts
+Vue.prototype.$echarts = echarts
 
 Vue.use(Antd);
 Vue.use(ElementUI);

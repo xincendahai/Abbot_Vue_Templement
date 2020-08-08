@@ -6,7 +6,7 @@ import Router from 'vue-router'
 
  import login from '../page/login.vue'
  import layout from '../page/layout.vue'
-// import transit from '../page/transit.vue'
+import transit from '../page/transit.vue'
 
 Vue.use(Router);
 
@@ -46,11 +46,11 @@ const routes = [
 	component: layout,
 	children: content_views_routes
 	},
-	// {
-	// path: '/transit',
-	// name:'transit',
-	// component: transit,
-	// }
+	{
+	path: '/transit',
+	name:'transit',
+	component: transit,
+	}
   ]
 
 
@@ -61,11 +61,11 @@ let resetPage = {
 };
 routes.push(resetPage);
 //添加404页面路由
-// let notFoundPage = {
-// 	path: '*',
-// 	redirect: 'transit'
-// };
-// routes.push(notFoundPage);
+let notFoundPage = {
+	path: '*',
+	redirect: 'transit'
+};
+routes.push(notFoundPage);
 
 
 const router = new Router({
