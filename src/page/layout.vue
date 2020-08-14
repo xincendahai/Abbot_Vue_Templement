@@ -10,7 +10,7 @@
 					  <router-view/>
 				 </div>  
           </div>
-		<div class="p">
+		<div class="tip">
 			<layoutConfigure/>
 		</div>
 	</div>
@@ -43,12 +43,12 @@
 </script>
 
 <style scoped lang="less">
-.p{
-	width: 4rem;
-	height: 4rem;
+.tip{
+	height: 3rem;
 	position:absolute;
-	bottom: 10%;
-	right: 15%;
-	overflow: hidden;
+	bottom: 0;
+	top: 0;
+	right: 0;
+	margin: auto;
 }
 </style>
