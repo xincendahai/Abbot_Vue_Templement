@@ -10,25 +10,48 @@
 		</div>
 		<div class="rightHeader" >
 			<a-avatar shape="square" size="small" icon="user" />
-			小明
+				{{userData.username}}
 			<lang-lang></lang-lang>
+			<span class="exit"
+			@click="layout">退出</span>
 		</div>		
 	</div>
 </template>
 
 <script>
+import { Logout } from './../../network/service'
 export default {
 	  data() {
 	    return {
 		  collapsed: false,
+		  userData:{}
 	    };
 	  },
 	  methods: {
-	     toggleCollapsed() {
+	    toggleCollapsed() {
 		   this.collapsed = !this.collapsed;
 		   this.$bus.$emit('clickMenu', this.collapsed)
-	    },
+		},
+		// 退出
+		layout(){
+			let data = {
+				userId:this.userData.id
+			}
+			Logout(data).then(res => {
+				if (res.status == 200) {
+					localStorage.removeItem('userData')
+					this.$router.push('/')
+				}else{
+					this.$message.error("内部错误");
+				}
+			})
+		}
+
+		
 	  },
+	mounted() {
+          this.userData = JSON.parse(localStorage.getItem("userData"))
+	}
 };
 </script>
 
@@ -62,6 +85,10 @@ export default {
 .rightHeader{
 	width: 150px;
 	height: 100%;
+}
+.exit{
+	margin-left: 20px;
+	cursor: pointer;
 }
 
 </style>

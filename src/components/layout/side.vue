@@ -13,10 +13,10 @@
     <a-menu
         mode="inline"
         :theme= this.$store.state.theme.theme
-        :inline-collapsed="collapsed"
         @click="eventMenuClick"
         :default-selected-keys="[$route.path]"
-        :selectedKeys="[$route.path]"   
+        :selectedKeys="[$route.path]" 
+		 :inline-collapsed="this.collapsed"
     >
         <template v-for="(item,index) in menuList">
         <a-menu-item v-if="item.child.length === 0" :key="item.menuUrl">

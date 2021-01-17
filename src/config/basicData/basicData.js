@@ -10,7 +10,6 @@ const basicData = {
       pageSize: 10,
       //默认当前页码
       currentPage: 1,
-  
     },
     ruleIpmi:[
       {

@@ -9,7 +9,7 @@
 				   <a-form-item>
 					  <a-input
 						v-decorator="[
-						  'userName',
+						  'username',
 						  { rules: [{ required: true, message: 'Please input your username!' }] },
 						]"
 						:placeholder="$t('home.putUserName')"
@@ -21,7 +21,7 @@
 					<a-form-item>
 					  <a-input-password allow-clear
 						v-decorator="[
-						  'passWord',
+						  'password',
 						 { rules: [{ required: true, message: 'Please input your password!' }] },
 						]"
 						:placeholder="$t('home.outPassWord')"
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { UserLogin } from './../network/service'
 export default {
 		name: 'layout',
 		data() {
@@ -68,20 +69,24 @@ export default {
 			      e.preventDefault();
 			      this.form.validateFields((err, values) => {
 			        if (!err) {
-					  if(values.userName == "admin" && values.passWord == "123456"){
-						  //获取菜单
-						let menu = this.$session.get.menuList();
-						sessionStorage.setItem("menuList",JSON.stringify(menu));
-						let menuList = JSON.parse(sessionStorage.getItem("menuList"))
-						if (menuList[0].menuUrl) {
-							this.$router.push(menuList[0].menuUrl);
-						} else {
-							for (let i = 0; i < menuList[0].child.length; i++) {
-								this.$router.push(menuList[0].child[i].menuUrl);
-								break;
+						UserLogin(values).then(res => {
+							if (res.status == 200) {
+								// sessionStorage.setItem("menuList",JSON.stringify(menu));
+								let menu = this.$session.get.menuList();
+								localStorage.setItem("userData",JSON.stringify(res.data));
+								let menuList = JSON.parse(sessionStorage.getItem("menuList"))
+								if (menuList[0].menuUrl) {
+									this.$router.push(menuList[0].menuUrl);
+								} else {
+									for (let i = 0; i < menuList[0].child.length; i++) {
+										this.$router.push(menuList[0].child[i].menuUrl);
+										break;
+									}
+								}
+							}else{
+								 this.$message.error(res.msg);
 							}
-						}
-					  }
+						});
 			        }
 			      });
 			},
