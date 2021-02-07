@@ -4,7 +4,9 @@
 		<ul class="crumbs-list-model transition crumbs-list" ref="crumbs_list_model">
 			<li class="crumb-item left flex-hv-center transition" v-for="(item,index) in crumbsList"
 			:key="index" :id="'crumb'+index" :class="nowCrumb==item.path?'active':''" @click="toPage(item.path)">
-				<span class="transition">{{item.name}}</span>
+				<span class="transition">
+				 {{$t('system.'+ item.name)}}
+				 </span>
 				<i class="el-icon-error transition" @click.stop="remove(index)"></i>
 			</li>
 		</ul>

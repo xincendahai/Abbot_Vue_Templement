@@ -7,7 +7,8 @@
 //导入axios
 import axios from 'axios'
 
-// import { notification } from 'antd';
+import { Notification } from 'element-ui'
+//import { notification } from 'antd';
 
 import qs from 'qs'
 
@@ -16,7 +17,7 @@ import { HTTP_PATH } from './httpConfig.js'
 const service = axios.create({
     baseURL: HTTP_PATH.base, // url = base url + request url
     withCredentials: true, // send cookies when cross-domain requests
-    timeout: 5000 // request timeout
+    timeout: 20000 // request timeout
  })
 
  // request interceptor
@@ -65,10 +66,12 @@ service.interceptors.request.use(
         })
         .catch(error => {
           reject(error)
-        //   notification.error({
-        //     message: '网络错误',
-        //     description: error,   
-        // });
+          Notification({
+            title: '网络错误',
+            message: error,
+            type: 'error',
+            position: 'bottom-right'
+          });
         })
     })
   }

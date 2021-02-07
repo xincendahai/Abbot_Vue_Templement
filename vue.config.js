@@ -1,9 +1,20 @@
 module.exports = {
+  //页面热更新
+  devServer : {
+    hot:true,//自动保存
+    open : true,//自动启动
+    port : 8080,//默认端口号
+    host : "0.0.0.0"
+  },
+  lintOnSave: false,
   css: {
     loaderOptions: {
       less: {
         lessOptions: {
           modifyVars: {
+            // 'primary-color': '#C00000',
+            // 'link-color': '#0DA679',
+            // 'border-radius-base': '2px',
             'primary-color': '#0DA679',
             'link-color': '#0DA679',
             'border-radius-base': '2px',

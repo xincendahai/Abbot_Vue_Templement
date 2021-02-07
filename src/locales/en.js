@@ -1,8 +1,12 @@
-// import  * as component from './en-Us/component';
+import  publicL from './en-Us/public';
+import  user from './en-Us/user';
+import menus from './en-Us/menus';
 
-// export default {
-//     ...component
-// };
+export const system = {
+  ...publicL,
+  ...user,
+  ...menus
+}
 
 export const home = {
   title : 'Wicresoft System',

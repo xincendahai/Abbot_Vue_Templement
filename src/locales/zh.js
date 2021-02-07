@@ -1,8 +1,12 @@
-// import  * as component from './zh-Ch/component';
+import publicL from './zh-Ch/public';
+import user from './zh-Ch/user';
+import menus from './zh-Ch/menus';
 
-// export default {
-//   ...component
-// };
+export const system  = {
+  ...publicL,
+  ...user,
+  ...menus,
+};
 
 export const home = {
   title : '微创管理系统',

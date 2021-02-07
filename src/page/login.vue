@@ -37,7 +37,7 @@
 							{{$t('home.rememberNum')}}
 					      </a-checkbox>
 					    </a-form-item>
-					<a-form-item>
+					  <a-form-item>
 					      <a-button type="primary" html-type="submit" style="width: 100%;color: #FFFFFF;">
 					       	{{ $t('home.login')}}
 					      </a-button>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { UserLogin } from './../network/service'
+import { UserLogin  , GetGurisdiction} from './../network/service'
 export default {
 		name: 'layout',
 		data() {
@@ -61,8 +61,7 @@ export default {
 				checkNick: false,
 				path:"",
 			}
-		},
-		
+		},	
 		methods: {
 			//提交账号密码
 			 handleSubmit(e) {
@@ -71,18 +70,8 @@ export default {
 			        if (!err) {
 						UserLogin(values).then(res => {
 							if (res.status == 200) {
-								// sessionStorage.setItem("menuList",JSON.stringify(menu));
-								let menu = this.$session.get.menuList();
 								localStorage.setItem("userData",JSON.stringify(res.data));
-								let menuList = JSON.parse(sessionStorage.getItem("menuList"))
-								if (menuList[0].menuUrl) {
-									this.$router.push(menuList[0].menuUrl);
-								} else {
-									for (let i = 0; i < menuList[0].child.length; i++) {
-										this.$router.push(menuList[0].child[i].menuUrl);
-										break;
-									}
-								}
+								this.getMenu()
 							}else{
 								 this.$message.error(res.msg);
 							}
@@ -94,10 +83,64 @@ export default {
 			 handleChange(e) {
 			      this.checkNick = e.target.checked;
 			},
-
+			
 			//把国际化存到localStorage
 			setLocal(){
 				localStorage.setItem("locale",this.$i18n.locale);
+			},
+
+			getMenu(){
+				GetGurisdiction().then(res => {
+						if (res.status == 200) {		
+								let treeData = []
+								if(res.data.length > 0){
+									res.data.map((item,index)=>{
+									treeData[index] = {}
+									treeData[index].menuName = item.name
+									treeData[index].menuUrl = item.url
+									if(item.children.length > 0){
+										treeData[index].child = []
+										item.children.map((val1,key1)=>{
+											let obj = {
+												menuName:val1.name,
+												menuUrl:val1.url,
+												child:[]
+											}
+											treeData[index].child.push(obj)
+										})
+									}else{
+										treeData[index].child = []
+									}
+								  })
+								  
+								sessionStorage.setItem("menuList",JSON.stringify(treeData));
+								// let menuList = JSON.parse(sessionStorage.getItem("menuList"))
+								// if (treeData[0].menuUrl) {
+								// 	this.$router.push(treeData[0].menuUrl);
+								// } else {
+								// 	for (let i = 0; i < treeData[0].child.length; i++) {
+								// 		this.$router.push(treeData[0].child[i].menuUrl);
+								// 		break;
+								// 	}
+								// }
+								  if(treeData[0].child.length > 0){
+									  this.$router.push(treeData[0].child[0].menuUrl);
+								  }else{
+									  this.$router.push(treeData[0].menuUrl);
+								  }
+								}else{
+										this.$message.error("请联系管理员");
+								}
+								
+								
+
+						       
+						
+
+						}else{
+							this.$message.error(res.msg);
+						}
+				});
 			}
 
 		},

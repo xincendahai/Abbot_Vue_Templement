@@ -3,7 +3,8 @@ export default {
 		openTagsView : true,
 		sidebarLogo : true,
 		themeColor : true,
-		theme : "dark"
+		theme : "dark",
+		language : window.localStorage.getItem("locale"),
 	},
 
 	mutations: {
@@ -26,7 +27,6 @@ export default {
 			}else{
 				return state.theme = "light"
 			}
-		
 		},
 	},
 

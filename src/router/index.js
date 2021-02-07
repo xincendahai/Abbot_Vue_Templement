@@ -69,7 +69,8 @@ routes.push(notFoundPage);
 
 
 const router = new Router({
-	routes
+	routes,
+	mode: 'history'
 });
 
 /*

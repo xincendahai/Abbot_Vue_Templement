@@ -3,28 +3,46 @@
 		<div class="leftHeader">
 		    <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapsed" class="icon"/> 
 			 <span> 
-			  <!-- <a-breadcrumb-item>Home</a-breadcrumb-item> -->
-              <!-- <a-breadcrumb-item><a href="">Application Center</a></a-breadcrumb-item>
-              <a-breadcrumb-item><a href="">Application List</a></a-breadcrumb-item> -->
+				  
 			</span> 
+			
 		</div>
 		<div class="rightHeader" >
-			<a-avatar shape="square" size="small" icon="user" />
+			<lang-headerNotice/>
+		   <lang-headerAvatar class="header-items"/>
+			<!-- <a-avatar shape="square" size="small" icon="user" />
 				{{userData.username}}
-			<lang-lang></lang-lang>
 			<span class="exit"
-			@click="layout">退出</span>
+			@click="layout">退出</span> -->
+			<!-- <lang-lang></lang-lang> -->
+		 <a-dropdown class="lang header-item">
+            <div>
+              <a-icon type="global"/>{{title}}
+            </div>
+            <a-menu slot="overlay">
+					 <a-menu-item 
+					 v-for="lang in langList" :key="lang.key"
+			          @click="checkLanguage(lang.key)" >{{lang.value.toLowerCase() + ' ' + lang.name}}
+			         </a-menu-item>
+            </a-menu>
+          </a-dropdown>
 		</div>		
 	</div>
 </template>
 
 <script>
-import { Logout } from './../../network/service'
+import { ModifyLanguage } from './../../network/service'
 export default {
+	name: 'headerAll',
 	  data() {
 	    return {
 		  collapsed: false,
-		  userData:{}
+		  userData:{},
+		  langList: [
+            {key: 'zh-CN', name: '简体中文', alias: '简体',value:'cn'},
+            {key: 'en-US', name: 'English', alias: 'English',value:'us'}
+		  ],
+		  title:this.$store.state.theme.language == "zh-CN" ? "中文" : "English",
 	    };
 	  },
 	  methods: {
@@ -32,25 +50,33 @@ export default {
 		   this.collapsed = !this.collapsed;
 		   this.$bus.$emit('clickMenu', this.collapsed)
 		},
-		// 退出
-		layout(){
-			let data = {
-				userId:this.userData.id
+	
+		checkLanguage(key){
+			let lang = this.$i18n.locale = key
+			this.$i18n.locale = lang
+			localStorage.setItem("locale",lang);
+			if(lang === 'zh-CN'){
+				this.changeLanuger(1)
+				this.title = "中文"
+			}else{
+				this.changeLanuger(0)
+				this.title = "English"
 			}
-			Logout(data).then(res => {
-				if (res.status == 200) {
-					localStorage.removeItem('userData')
-					this.$router.push('/')
-				}else{
-					this.$message.error("内部错误");
-				}
-			})
-		}
+		 },
 
-		
+		 changeLanuger(value){
+			 ModifyLanguage({
+				 statusId : value
+			   }).then(res => {
+				 if (res.status !== 200) {
+					this.$message.error(res.msg);
+				  }
+			  });
+		 }	
 	  },
 	mounted() {
-          this.userData = JSON.parse(localStorage.getItem("userData"))
+		this.userData = JSON.parse(localStorage.getItem("userData"))
+		this.$i18n.locale = localStorage.getItem("locale")
 	}
 };
 </script>
@@ -83,12 +109,68 @@ export default {
 	}
 }
 .rightHeader{
-	width: 150px;
-	height: 100%;
+	  display: flex;
+	  color: inherit;
+	  .header-item{
+        color: inherit;
+        padding: 0 12px;
+        cursor: pointer;
+        align-self: center;
+        a{
+          color: inherit;
+          i{
+            font-size: 16px;
+          }
+        }
+      }
 }
 .exit{
 	margin-left: 20px;
 	cursor: pointer;
 }
-
+ .logo {
+      height: 64px;
+      line-height: 58px;
+      vertical-align: top;
+      display: inline-block;
+      padding: 0 12px 0 24px;
+      cursor: pointer;
+      font-size: 20px;
+      color: inherit;
+      &.pc{
+        padding: 0 12px 0 0;
+      }
+      img {
+        vertical-align: middle;
+      }
+      h1{
+        color: inherit;
+        display: inline-block;
+        font-size: 16px;
+      }
+	}
+	 .header-item{
+        color: inherit;
+        padding: 0 12px;
+        cursor: pointer;
+        align-self: center;
+        a{
+          color: inherit;
+          i{
+            font-size: 16px;
+          }
+        }
+      }
+	.header-items{
+		color: inherit;
+        padding: 0 0 0 12px;
+        cursor: pointer;
+        align-self: center;
+        a{
+          color: inherit;
+          i{
+            font-size: 16px;
+          }
+        }
+	}
 </style>

@@ -21,14 +21,18 @@
         <template v-for="(item,index) in menuList">
         <a-menu-item v-if="item.child.length === 0" :key="item.menuUrl">
             <a-icon type="pie-chart" />
-            <span>{{item.menuName}}</span>
+            <span>
+               {{$t('system.'+ item.menuName)}}
+            </span>
         </a-menu-item>
         <a-sub-menu v-else :key="index">
             <span slot="title"><a-icon type="mail" />
-            <span>{{item.menuName}}</span>
+            <span>
+                 {{$t('system.'+ item.menuName)}}
+             </span>
             </span>
                 <a-menu-item v-for="val in item.child" :key="val.menuUrl">
-                    {{val.menuName}}
+                     {{$t('system.'+ val.menuName)}}
                 </a-menu-item>
         </a-sub-menu>
     </template>
