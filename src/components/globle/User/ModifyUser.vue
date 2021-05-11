@@ -3,8 +3,13 @@
     <span @click="showModal" class="ModifyBtn">
        {{$t('system.modify')}}
     </span>
-    <a-modal v-model="visible" :title="$t('system.modify')" @ok="handleSubmit"
-    @cancel="handleReset"
+    <a-modal 
+      v-model="visible" 
+      :title="$t('system.modify')" 
+      @ok="handleSubmit"
+      @cancel="handleReset"
+      :okText="$t('system.confirm')"
+      :cancelText="$t('system.cancel')"  
     >
     <a-form :form="form" @submit="handleSubmit">
     <a-form-item v-bind="formItemLayout" :label="$t('system.userName')">

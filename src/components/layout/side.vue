@@ -1,13 +1,24 @@
 <template>
-    <div style="width:100%;height: 100%;" >
-    <div v-if="this.$store.state.theme.sidebarLogo">
-        <div class="layout_logo" v-if="!collapsed" style="padding: 0 1rem" 
+    <div style="width:100%;height: 100%;"
+     :class="this.collapsed == false ? 'sidebarLogoWidth':'' ">
+    <div v-if="this.$store.state.theme.sidebarLogo" 
+    >
+        <!-- <div class="layout_logo" v-if="!collapsed" style="padding: 0 1rem" 
         :class="this.$store.state.theme.themeColor == false ? 'layout_logoColor':'layout_logo' "
         >
             {{ $t('home.title')}}	
         </div>
+        <div class="layout_logo" v-else >
+            <a-icon type="global" />
+        </div> -->
+        <div class="layout_logo" v-if="!collapsed" style="padding: 0 1rem" 
+        :class="this.$store.state.theme.themeColor == false ? 'layout_logoColor':'layout_logo'"
+        :style="{'width': (this.collapsed==false ? '20rem':'')}"
+        >
+            {{ $t('home.title')}}	
+        </div>
         <div class="layout_logo" v-else>
-                <a-icon type="global" />
+            <a-icon type="global" />
         </div>
     </div>
     <a-menu
@@ -16,7 +27,7 @@
         @click="eventMenuClick"
         :default-selected-keys="[$route.path]"
         :selectedKeys="[$route.path]" 
-		 :inline-collapsed="this.collapsed"
+		:inline-collapsed="this.collapsed"
     >
         <template v-for="(item,index) in menuList">
         <a-menu-item v-if="item.child.length === 0" :key="item.menuUrl">
@@ -26,7 +37,8 @@
             </span>
         </a-menu-item>
         <a-sub-menu v-else :key="index">
-            <span slot="title"><a-icon type="mail" />
+            <span slot="title">
+               <a-icon type="team" />
             <span>
                  {{$t('system.'+ item.menuName)}}
              </span>
@@ -95,11 +107,15 @@
 }
 .layout_logoColor{
     width: 100%;
+    // min-width: 20rem;
     height: 6.4rem;
     line-height: 6.4rem;
     color: #0F5B42;
     text-align: center;
     font-size: 2.2rem;
+}
+.sidebarLogoWidth{
+    min-width: 20rem !important;
 }
 
 

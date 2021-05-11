@@ -8,7 +8,7 @@
 		       <a-col
 		         :span="6"
 		       >
-		         <a-form-item label="用户名">
+		         <a-form-item :label="$t('system.roleName')">
 		           <a-input
 		             v-decorator="[
 		               username,
@@ -19,7 +19,7 @@
 			   <a-col
 			     :span="6"
 			   >
-			     <a-form-item label="邮箱">
+			     <a-form-item :label="this.$t('system.description')">
 			       <a-input
 			         v-decorator="[
 			           username
@@ -43,7 +43,7 @@
 		 <Role-AddRole @success="refresh"></Role-AddRole>
 		 <a-table 
 		 		  rowKey='id'
-		 		  :columns="columns" 
+		 		  :columns="columns()" 
 		          :data-source="data"
 				  :pagination="pagination"
 				  @change="handleTableChange"
@@ -68,35 +68,7 @@
 </template>
 
 <script>
-const columns = [
-  {
-	title: '角色名',
-    dataIndex: 'roleName',
-	key: 'roleName',
-	ellipsis: true,
-	width: '25%'
-  },
-  {
-    title: '描述',
-    dataIndex: 'description',
-	key: 'description',
-	ellipsis: true,
-	width: '25%'
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'createTime',
-	key: 'createTime',
-	ellipsis: true,
-	width: '30%'
-  },
-  {
-    title: '操作',
-	key: 'action',
-	width: '20%',
-	scopedSlots: { customRender: 'action' },
-  },
-];
+
 
 
 import { RoleData , DeleteRole } from './../../../network/service'
@@ -106,7 +78,6 @@ export default {
     return {
 	  form: this.$form.createForm(this, { name: 'advanced_search' }),
 	  data:[],
-	  columns,
 	   username:"",
 	   email:'',
 	  pagination: {
@@ -115,7 +86,42 @@ export default {
 		showSizeChanger: true,
 		pageSizeOptions:  this.$basicData.pag.pageSizeOptions,//每页中显示的数据
 		showTotal: total => `共有 ${total} 条数据`,  //分页中显示总的数据
-      },
+	  },
+
+	  	//表格header
+	 columns() {
+        return [
+            {
+				title: this.$t('system.roleName'),
+				dataIndex: 'roleName',
+				key: 'roleName',
+				ellipsis: true,
+				width: '25%'
+			},
+			{
+				title:  this.$t('system.description'),
+				dataIndex: 'description',
+				key: 'description',
+				ellipsis: true,
+				width: '25%'
+			},
+			{
+				title: this.$t('system.createTime'),
+				dataIndex: 'createTime',
+				key: 'createTime',
+				ellipsis: true,
+				width: '30%'
+			},
+			{
+				title: this.$t('system.operation'),
+				key: 'action',
+				width: '20%',
+				scopedSlots: { customRender: 'action' },
+			},
+            ]
+         }
+	  
+
     };
   },
 
@@ -137,7 +143,7 @@ export default {
 					 pageSize: 10,//每页中显示10条数据
 					 showSizeChanger: true,
 					 pageSizeOptions: ["10", "20", "50", "100"],//每页中显示的数据
-					 showTotal: total => `共有 ${res.data.records} 条数据`,  //分页中显示总的数据
+					 showTotal: total => this.$t('system.showTotal', { msg: res.data.records }),  //分页中显示总的数据
 				}
 			}else{
 				this.$message.error(res.msg);

@@ -40,10 +40,20 @@
 		    </a-form>
 		  </div>
 		<a-card :style="{ marginTop: '10px' }">
+		<div :style="{ marginBottom: '10px',height:'4rem' }">
 		 <User-AddUser @success="refresh" :roleClassificationData="roleClassificationData"></User-AddUser>
+		 <a-button :style="{ float:'right',marginRight:'1rem' }"
+		  @click="this.excelUserData">
+                 {{$t('system.exportExcel')}}
+        </a-button>
+		<a-button :style="{ float:'right',marginRight:'1rem' }"
+		  @click="this.importExcelUserData">
+		   {{$t('system.importExcel')}}
+        </a-button>
+		</div>
 		 <a-table 
 		 		 rowKey='id'
-		         :columns="column"
+		         :columns="columns()" 
 		         :data-source="data"
 				 :pagination="pagination"
 				 :loading="loading"
@@ -69,74 +79,9 @@
 </template>
 
 <script>
-const column = [
-  {
-	title: '用户名',
-    dataIndex: 'username',
-	key: 'username',
-	ellipsis: true,
-  },
-  {
-    title: '邮箱',
-    dataIndex: 'email',
-	key: 'email',
-	ellipsis: true,
-  },
-  {
-    title: '手机号',
-    dataIndex: 'mobile',
-	key: 'mobile',
-	ellipsis: true,
-  },
-  {
-    title: '角色名',
-    key: 'roleName',
-    dataIndex: 'roleName',
-	scopedSlots: { customRender: 'tags' },
-	ellipsis: true,
-  },
-  {
-    title: '操作',
-    key: 'action',
-	scopedSlots: { customRender: 'action' },
-  },
-];
-const columnEN = [
-  {
-	title: 'User Name',
-    dataIndex: 'username',
-	key: 'username',
-	ellipsis: true,
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-	key: 'email',
-	ellipsis: true,
-  },
-  {
-    title: 'Mobile',
-    dataIndex: 'mobile',
-	key: 'mobile',
-	ellipsis: true,
-  },
-  {
-    title: 'Role Name',
-    key: 'roleName',
-    dataIndex: 'roleName',
-	scopedSlots: { customRender: 'tags' },
-	ellipsis: true,
-  },
-  {
-    title: 'Operation',
-    key: 'action',
-	scopedSlots: { customRender: 'action' },
-  },
-];
 
-
-
-import { QueryAll , RoleClassification , QueryUsersAll , DeleteUser } from './../../../network/service'
+import { QueryAll , RoleClassification , QueryUsersAll , DeleteUser ,UserExportExcel} from './../../../network/service'
+import api from './../../../network/api'
 export default {
   name:'user',
   data() {
@@ -144,8 +89,6 @@ export default {
 	  form: this.$form.createForm(this, { name: 'horizontal_user' }),
 	  data:[],
 	  roleClassificationData:[],
-	  columnEN,
-	  column,
 	  loading : true,
 	  username:"",
 	  email:'',
@@ -155,8 +98,43 @@ export default {
 		pageSize: this.$basicData.pag.pageSize,
 		showSizeChanger: true,
 		pageSizeOptions:  this.$basicData.pag.pageSizeOptions,//每页中显示的数据
-		showTotal: total => `共有 ${total} 条数据`,  //分页中显示总的数据
-      },
+		showTotal: total => `共有${total} 条数据`,  //分页中显示总的数据
+	  },
+	//表格header
+	 columns() {
+        return [
+                {
+				title: this.$t('system.userName'),
+				dataIndex: 'username',
+				key: 'username',
+				ellipsis: true,
+    			},
+				{
+					title: this.$t('system.email'),
+					dataIndex: 'email',
+					key: 'email',
+					ellipsis: true,
+				},
+				{
+					title: this.$t('system.mobile'),
+					dataIndex: 'mobile',
+					key: 'mobile',
+					ellipsis: true,
+				},
+				{
+					title: this.$t('system.roleName'),
+					key: 'roleName',
+					dataIndex: 'roleName',
+					scopedSlots: { customRender: 'tags' },
+					ellipsis: true,
+				},
+				{
+					title:  this.$t('system.operation'),
+					key: 'action',
+					scopedSlots: { customRender: 'action' },
+				}  
+            ]
+         }
     };
   },
   computed: {
@@ -185,7 +163,7 @@ export default {
 					 pageSize: dataList.pageSize,//每页中显示10条数据
 					 showSizeChanger: true,
 					 pageSizeOptions: this.$basicData.pag.pageSizeOptions,//每页中显示的数据
-					 showTotal: total => `共有 ${res.data.records} 条数据`,  //分页中显示总的数据
+					 showTotal: total => this.$t('system.showTotal', { msg: res.data.records }),  //分页中显示总的数据
 				}
 			}else{
 					this.$message.error(res.msg);
@@ -203,7 +181,7 @@ export default {
 	},
 
 	handleTableChange(pagination) {
-		console.log(pagination)
+		// console.log(pagination)
 		this.getDatas(pagination)
     },
 
@@ -248,13 +226,17 @@ export default {
 			}
 		});
 	},
-	// changeLanuge(){
-	// 	this.columnZE = this.$store.state.theme.language == 'zh-CN' ? columnEN:columnZH;
-	// }
+	excelUserData () {
+		this.$Fother.download(api.base+api.exportExcel.userExportExcel)
+	},
+	importExcelUserData(){
+		
+
+	}
   },
    mounted () {
 	this.getData();
-	// this.changeLanuge()
+	console.log(this.$store.state.theme.language)
 	this.getRoleClassification()
     this.$nextTick(() => {
       this.form.validateFields();

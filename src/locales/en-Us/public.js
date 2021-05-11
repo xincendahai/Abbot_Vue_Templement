@@ -6,5 +6,10 @@ export default {
     delete: 'Delete',
     isDeleteData :'Sure to delete?',
     yes : 'Yes',
-    no : 'No'
+    no : 'No',
+    confirm: 'confirm',
+    cancel: 'cancel',
+    importExcel: 'Import Excel',
+    exportExcel: 'Export Excel',
+    jurisdiction: 'Jurisdiction'
 }

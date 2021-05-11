@@ -48,6 +48,8 @@ export default {
 	  methods: {
 	    toggleCollapsed() {
 		   this.collapsed = !this.collapsed;
+		//    console.log(this.collapsed +"diyi")
+		   this.$store.commit('collapsed', this.collapsed)
 		   this.$bus.$emit('clickMenu', this.collapsed)
 		},
 	

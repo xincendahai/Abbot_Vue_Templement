@@ -5,10 +5,11 @@ export default {
 		themeColor : true,
 		theme : "dark",
 		language : window.localStorage.getItem("locale"),
+		collapsed:false
 	},
 
 	mutations: {
-		
+			
 		onOpenTagsView: (state , payload) =>{
 		  return state.openTagsView = payload
 		},
@@ -28,6 +29,11 @@ export default {
 				return state.theme = "light"
 			}
 		},
+
+		collapsed: (state , payload) =>{
+			return state.collapsed = payload
+		},
+  
 	},
 
 	actions:{

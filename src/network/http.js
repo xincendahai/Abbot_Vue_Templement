@@ -17,7 +17,7 @@ import { HTTP_PATH } from './httpConfig.js'
 const service = axios.create({
     baseURL: HTTP_PATH.base, // url = base url + request url
     withCredentials: true, // send cookies when cross-domain requests
-    timeout: 20000 // request timeout
+    timeout: 5000 // request timeout
  })
 
  // request interceptor
@@ -59,6 +59,7 @@ service.interceptors.request.use(
         options.data = JSON.stringify(options.data);  //qs.stringify
         options.headers['Content-Type'] = 'application/json';
       }
+      // options.responseType ='blob'
       // application/x-www-form-urlencoded
       service(options)
         .then(res => {

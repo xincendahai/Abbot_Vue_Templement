@@ -3,8 +3,13 @@
     <a-button type="primary" @click="showModal" class="addBtn">
       {{$t('system.add')}}
     </a-button>
-    <a-modal v-model="visible" :title="$t('system.add')" @ok="handleSubmit"
-    @cancel="handleReset"
+    <a-modal 
+      v-model="visible" 
+      :title="$t('system.add')" 
+      @ok="handleSubmit"
+      @cancel="handleReset"
+      :okText="$t('system.confirm')"
+      :cancelText="$t('system.cancel')"
     >
     <a-form :form="form" @submit="handleSubmit">
     <a-form-item v-bind="formItemLayout" :label="$t('system.userName')">
@@ -76,6 +81,19 @@
         </a-select-option>
       </a-select>
     </a-form-item>
+     <a-form-item v-bind="formItemLayout" :label="$t('system.jurisdiction')">
+      <a-select
+       v-decorator="[
+          'jurisdiction'
+        ]">
+        <a-select-option  v-for="(item,index) in this.jurisdictionList"
+        :key="index"
+        :value="item.value"
+        >
+          {{item.value}}
+        </a-select-option>
+      </a-select>
+    </a-form-item>
     </a-form>
     </a-modal>
   </div>
@@ -101,6 +119,7 @@ export default {
           sm: { span: 16 },
         },
       },
+      jurisdictionList:this.$basicData.jurisdiction
       
     };
   },
@@ -133,13 +152,9 @@ export default {
 };
 </script>
 <style scoped>
-.wrapadd{
-    width: 100%;
-    height: 40px;
-
-}
 .addBtn{
     float:right;
+    width: 70px;
 }
 
 

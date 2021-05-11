@@ -15,7 +15,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 //引入ant-design-vue
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.less';
-
+//引入取色器
+import vcolorpicker from 'vcolorpicker'
+Vue.use(vcolorpicker)
 //引入bus
 import Bus from './bus'
 

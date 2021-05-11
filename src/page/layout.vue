@@ -1,7 +1,10 @@
 <template>
 	<div id="layout_container">
-		 <div class="nav-left" :class="this.$store.state.theme.themeColor == false ? 'nav-leftLight':''">
-            <layoutSide/>   
+		 <div class="nav-left"  :class="!this.$store.state.theme.themeColor? 'nav-leftLight':''"
+		 :style="{width:(!this.$store.state.theme.collapsed ? '200px':'80px')}"
+		 
+		 >
+            <layoutSide />   
          </div>
 		  <div class="main">
                  <layoutHeader/>
@@ -33,12 +36,17 @@
 		},
 		data() {
 			return {
-				themeColor : this.$store.state.theme.themeColor
+				themeColor : this.$store.state.theme.themeColor,
+				collapsed : this.$store.state.theme.collapsed,
 			}
 		},
 		methods: {
-
+			
+			
 		},
+		mounted(){
+			console.log(this.collapsed)
+		}
 	}
 </script>
 
@@ -51,4 +59,6 @@
 	right: 0;
 	margin: auto;
 }
+
+
 </style>

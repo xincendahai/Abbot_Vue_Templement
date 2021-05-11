@@ -4,7 +4,7 @@
  * @Date: 2020-6-3
  */
 const api = {
-       base:'http://localhost:8089',
+      base:'http://localhost:8089',
       //base:'http://42.192.52.209:8089',
       user:{
            /* 用户注册 */
@@ -36,6 +36,10 @@ const api = {
       menus:{
             queryMenuAll:'/menu/queryMenuAll',
             getGurisdiction:'/user/getGurisdiction'
+      },
+      exportExcel:{
+            userExportExcel:'/user/export',
+            userImportExcel:'/user/import'
       }
 }
 

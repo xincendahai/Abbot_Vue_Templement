@@ -3,6 +3,9 @@
 		<div class="wrap">
 			<echarts-lineBarEcharts :option="option" :timeStamp="timeStamp"></echarts-lineBarEcharts>
 		</div>
+    <div class="wrap">
+			<colorPicker v-model="color" />
+		</div>
 	</div>
 </template>
 
@@ -10,6 +13,7 @@
 export default {
     data() {
       return {
+        color: '#ff0000',
         option:{
           yAxis:{
             name:'功率（KW）',
@@ -32,11 +36,10 @@ export default {
       getData(){
 		  let data = [{id:"60",name:"张三"},{id:"50",name:"张12"},{id:"40",name:"张sn"},{id:"70",name:"张12"},]
 		  this.option.series[0].data = [];
-
               data.forEach(element => {
                 this.option.series[0].data.push([element.name, element.id]);
               }); 
-      }
+      },
     },
     mounted() {
       this.getData();

@@ -11,20 +11,21 @@ const basicData = {
       //默认当前页码
       currentPage: 1,
     },
-    ruleIpmi:[
+    jurisdiction:[
       {
         key:'1',
-        value:'取最大值',
+        value:'读权限',
       },
       {
         key:'2',
-        value:'求和',
+        value:'写权限',
       },
       {
         key:'3',
-        value:'不判断sensorStateValid',
-      },
-    ]
+        value:'读写权限',
+      }
+    ],
+
   }
   
   export default basicData

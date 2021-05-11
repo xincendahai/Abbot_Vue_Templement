@@ -144,3 +144,12 @@ export function ModifyLanguage(data) {
             data 
     })
 }
+export function UserImportExcel(data) {
+    return request({
+            url: HTTP_PATH.exportExcel.userImportExcel,
+            method: 'post',
+            data 
+    })
+}
+
+

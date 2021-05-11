@@ -93,6 +93,9 @@ export default {
 				GetGurisdiction().then(res => {
 						if (res.status == 200) {		
 								let treeData = []
+								if(res.data == null){
+									this.$message.error("请联系管理员");
+								}
 								if(res.data.length > 0){
 									res.data.map((item,index)=>{
 									treeData[index] = {}
@@ -114,15 +117,6 @@ export default {
 								  })
 								  
 								sessionStorage.setItem("menuList",JSON.stringify(treeData));
-								// let menuList = JSON.parse(sessionStorage.getItem("menuList"))
-								// if (treeData[0].menuUrl) {
-								// 	this.$router.push(treeData[0].menuUrl);
-								// } else {
-								// 	for (let i = 0; i < treeData[0].child.length; i++) {
-								// 		this.$router.push(treeData[0].child[i].menuUrl);
-								// 		break;
-								// 	}
-								// }
 								  if(treeData[0].child.length > 0){
 									  this.$router.push(treeData[0].child[0].menuUrl);
 								  }else{
@@ -132,11 +126,6 @@ export default {
 										this.$message.error("请联系管理员");
 								}
 								
-								
-
-						       
-						
-
 						}else{
 							this.$message.error(res.msg);
 						}
