@@ -9,7 +9,7 @@ export const system = {
 }
 
 export const home = {
-  title : 'Wicresoft System',
+  title : 'System Manger',
   login : 'Login',
   userName : 'UserName',
   passWord : 'PassWord',

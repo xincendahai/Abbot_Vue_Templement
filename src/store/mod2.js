@@ -79,8 +79,8 @@ export default {
 },
 	actions:{
 		selectAll({commit}){
-		            commit('SELECTALL')
-		       },
+		        commit('SELECTALL')
+		},
 		selectone({commit},id){
 			  commit('SELECTONE',id)
 		},
@@ -103,7 +103,7 @@ export default {
 				})
 			}
 			 localStorage.setItem("search",JSON.stringify(state.carAll)); 
-			            return state.carAll
+			 return state.carAll
 		},
 		//获取结算金额            
 		allMoney:(state)=>{

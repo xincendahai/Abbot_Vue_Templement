@@ -130,10 +130,11 @@ export function ModifyUserData(data) {
     })
 }
 
-export function GetGurisdiction() {
+export function GetGurisdiction(data) {
     return request({
-            url: HTTP_PATH.menus.getGurisdiction,
-            method: 'post',  
+            url: HTTP_PATH.menus.getGurisdiction(data.id),
+            method: 'get',
+			data 
     })
 }
 

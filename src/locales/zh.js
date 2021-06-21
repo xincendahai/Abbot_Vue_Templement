@@ -9,7 +9,7 @@ export const system  = {
 };
 
 export const home = {
-  title : '微创管理系统',
+  title : '管理系统',
   login : '登录',
   userName : '用户名',
   passWord : '密码',

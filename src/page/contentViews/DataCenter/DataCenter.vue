@@ -1,10 +1,19 @@
 <template>
 	<div id="page">
 		<div class="wrap">
-			<echarts-lineBarEcharts :option="option" :timeStamp="timeStamp"></echarts-lineBarEcharts>
+        <cardDragger 
+        :data="cardList"
+        :colNum="3"
+        :cardOutsideWidth="300"
+        :cardInsideWidth="260"
+        :cardOutsideHeight="310"
+        :cardInsideHeight="240"
+        @finishDrag="finishDrag"
+        >
+        </cardDragger>
 		</div>
     <div class="wrap">
-			<colorPicker v-model="color" />
+			<!-- <colorPicker v-model="color" /> -->
 		</div>
 	</div>
 </template>
@@ -14,22 +23,44 @@ export default {
     data() {
       return {
         color: '#ff0000',
-        option:{
-          yAxis:{
-            name:'功率（KW）',
-			splitLine:{show:true},
-          },
-          series:[
-            {
-              name:'总功率',
-              type:'line',
-              areaStyle: {},
-              smooth: true,
-              data: [],
-			itemStyle:{ normal:{ color:'#bda3f2' } },
-            }]
-        },
-        timeStamp:(new Date()).getTime()
+        cardList: [{
+        positionNum: 1,
+        name: "演示卡片"+1,
+        id: "card"+1,
+      },
+      {
+        positionNum: 2,
+        name: "演示卡片"+2,
+        id: "card"+2,
+      },
+      {
+        positionNum: 3,
+        name: "演示卡片"+3,
+        id: "card"+3,
+      },
+      {
+        positionNum: 4,
+        name: "演示卡片"+4,
+        id: "card"+4,
+      },
+      
+      ],
+      //   option:{
+      //     yAxis:{
+      //       name:'功率（KW）',
+			// splitLine:{show:true},
+      //     },
+      //     series:[
+      //       {
+      //         name:'总功率',
+      //         type:'line',
+      //         areaStyle: {},
+      //         smooth: true,
+      //         data: [],
+			// itemStyle:{ normal:{ color:'#bda3f2' } },
+      //       }]
+      //   },
+        // timeStamp:(new Date()).getTime()
       }
     },
     methods: {
@@ -40,8 +71,16 @@ export default {
                 this.option.series[0].data.push([element.name, element.id]);
               }); 
       },
+      
+    
+      finishDrag(old,newVal,item){
+        console.log(old)
+        console.log(newVal)
+        console.log(item)
+      }
     },
     mounted() {
+      console.log(this.cardList)
       this.getData();
 	}
 }

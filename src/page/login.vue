@@ -71,7 +71,7 @@ export default {
 						UserLogin(values).then(res => {
 							if (res.status == 200) {
 								localStorage.setItem("userData",JSON.stringify(res.data));
-								this.getMenu()
+								this.getMenu(res.data.id)
 							}else{
 								 this.$message.error(res.msg);
 							}
@@ -89,8 +89,9 @@ export default {
 				localStorage.setItem("locale",this.$i18n.locale);
 			},
 
-			getMenu(){
-				GetGurisdiction().then(res => {
+			getMenu(id){
+				console.log(id)
+				GetGurisdiction({id:id}).then(res => {
 						if (res.status == 200) {		
 								let treeData = []
 								if(res.data == null){

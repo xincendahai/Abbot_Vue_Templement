@@ -4,7 +4,7 @@
 	<div class="content">
 		<!-- 搜索 -->
 		<div id="components-form-demo-advanced-search">
-		    <a-form class="ant-advanced-search-form" :form="form">
+		    <a-form class="ant-advanced-search-form" :form="form"  @submit="handleSearch">
 		      <a-row :gutter="24">
 		       <a-col
 		         :span="6"
@@ -12,7 +12,7 @@
 		         <a-form-item :label="$t('system.userName')">
 		           <a-input
 		             v-decorator="[
-		               username
+		               'username'
 		             ]"
 		           />
 		         </a-form-item>
@@ -23,13 +23,13 @@
 			     <a-form-item :label="$t('system.email')">
 			       <a-input
 			         v-decorator="[
-			           email
+			           'email'
 			         ]"
 			       />
 			     </a-form-item>
 			   </a-col>
 			   <a-col :span="12" :style="{ textAlign: 'right' }">
-				   <a-button type="primary"  @submit="handleSearch">
+				   <a-button type="primary"  html-type="submit">
 				     {{$t('system.search')}}
 				   </a-button>
 				   <a-button :style="{ marginLeft: '8px' }" @click="handleReset">
@@ -86,7 +86,7 @@ export default {
   name:'user',
   data() {
     return {
-	  form: this.$form.createForm(this, { name: 'horizontal_user' }),
+	  form: this.$form.createForm(this, { name: 'coordinated' }),
 	  data:[],
 	  roleClassificationData:[],
 	  loading : true,
@@ -198,7 +198,12 @@ export default {
     handleSearch(e) {
       e.preventDefault();
       this.form.validateFields((error, values) => {
-     
+		  // console.log(values)
+		  // if (!err) {
+		  //           console.log(values)
+		  //         }
+				  
+			
       });
 	},
 	
@@ -236,7 +241,6 @@ export default {
   },
    mounted () {
 	this.getData();
-	console.log(this.$store.state.theme.language)
 	this.getRoleClassification()
     this.$nextTick(() => {
       this.form.validateFields();

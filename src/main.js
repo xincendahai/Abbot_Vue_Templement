@@ -30,6 +30,9 @@ Vue.use(Vue18n)
 // 引入echarts
 import echarts from 'echarts'
 
+//引入拖拽模块
+import {installCardDragger} from 'carddragger'
+Vue.use(installCardDragger)
 
 // 注册全局变量
 import basicData from './config/basicData'

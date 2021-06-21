@@ -188,7 +188,7 @@ export default {
     handleSearch(e) {
       e.preventDefault();
       this.form.validateFields((error, values) => {
-        console.log('error', error);
+        console.log(values);
         console.log('Received values of form: ', values);
       });
 	},
